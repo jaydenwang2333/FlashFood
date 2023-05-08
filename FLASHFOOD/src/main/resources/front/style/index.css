@@ -1,0 +1,8 @@
+html,
+body {
+    max-width: 750px;
+    height: 100%;
+    background: #f3f2f7;
+    font-family: Helvetica;
+    overflow: hidden;
+}
