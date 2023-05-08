@@ -19,3 +19,64 @@
     <!--Styles for the content of this page-->
     <link rel="stylesheet" href="styles/main.css"/>
 </head>
+<body>
+<div id="main" class="app">
+    <div class="divHead">
+        <img src="./images/user.png" @click="toUserPage"/>
+    </div>
+    <div class="divTitle">
+        <div class="divStatic">
+            <img src="./images/logo.png" class="logo"/>
+            <div class="divDesc">
+                <div class="divName">Ufood</div>
+                <div class="divSend">
+                    <span><img src="./images/time.png"/> distance 11.4km</span>
+                    <span><img src="./images/money.png"/> Delivery fee 5</span>
+                    <span><img src="./images/location.png"/> Estimated duration 58min</span>
+                </div>
+            </div>
+        </div>
+        <div class="divDesc">
+            Introduction: UFOOD is a software that helps students deliver meals in schools.
+        </div>
+    </div>
+    <div class="divBody">
+        <div class="divType">
+            <ul>
+                <li v-for="(item,index) in categoryList" :key="index" @click="categoryClick(index,item.id,item.type)"
+                    :class="{active:activeType === index}">{{item.name}}
+                </li>
+            </ul>
+        </div>
+        <div class="divMenu">
+            <div>
+                <div class="divItem" v-for="(item,index) in dishList" :key="index" @click="dishDetails(item)">
+                    <el-image :src="imgPathConvert(item.image)">
+                        <div slot="error" class="image-slot">
+                            <img src="./images/noImg.png"/>
+                        </div>
+                    </el-image>
+                    <div>
+                        <div class="divName">{{item.name}}</div>
+                        <div class="divDesc">{{item.description}}</div>
+                        <div class="divDesc">{{'monthly sales' + (item.saleNum ? item.saleNum : 0) }}</div>
+                        <div class="divBottom"><span>$</span><span>{{item.price/100}}</span></div>
+                        <div class="divNum">
+                            <div class="divSubtract" v-if="item.number > 0">
+                                <img src="./images/subtract.png" @click.prevent.stop="subtractCart(item)"/>
+                            </div>
+                            <div class="divDishNum">{{item.number}}</div>
+                            <div class="divTypes" v-if="item.flavors && item.flavors.length > 0 && !item.number "
+                                 @click.prevent.stop="chooseFlavorClick(item)">Select specifications
+
+                            </div>
+                            <div class="divAdd" v-else>
+                                <img src="./images/add.png" @click.prevent.stop="addCart(item)"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
