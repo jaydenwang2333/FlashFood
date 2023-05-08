@@ -40,7 +40,7 @@ public class WebMvcConfig extends WebMvcConfigurationSupport {
     protected void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
         // Create converter object
         MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-        // change object to Json
+        // change object to Json:q
         converter.setObjectMapper(new JacksonObjectMapper());
         // add customoer converter
         converters.add(0, converter); // 0 meas first postion of converter
