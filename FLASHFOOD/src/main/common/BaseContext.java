@@ -1,5 +1,5 @@
+package NoName.flashfood.common;
 
-package config;
 public class BaseContext {
     private static final ThreadLocal<Long> threadLocal = new ThreadLocal<>();
 
