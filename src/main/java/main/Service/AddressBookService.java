@@ -1,4 +1,4 @@
-package main.service;
+package main.Service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import main.entity.AddressBook;
