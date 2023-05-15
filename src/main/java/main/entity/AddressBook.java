@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
- * 地址簿
+ * address book
  */
 @Data
 public class AddressBook implements Serializable {
@@ -17,75 +17,75 @@ public class AddressBook implements Serializable {
     private Long id;
 
 
-    //用户id
+    //userId
     private Long userId;
 
 
-    //收货人
+    //consignee
     private String consignee;
 
 
-    //手机号
+    //phone
     private String phone;
 
 
-    //性别 0 女 1 男
+    //Gender 0 Female 1 Male
     private String sex;
 
 
-    //省级区划编号
+    //provinceCode
     private String provinceCode;
 
 
-    //省级名称
+    //provinceName
     private String provinceName;
 
 
-    //市级区划编号
+    //cityCode
     private String cityCode;
 
 
-    //市级名称
+    //cityName
     private String cityName;
 
 
-    //区级区划编号
+    //districtCode
     private String districtCode;
 
 
-    //区级名称
+    //districtName
     private String districtName;
 
 
-    //详细地址
+    //detail Add
     private String detail;
 
 
-    //标签
+    //label
     private String label;
 
-    //是否默认 0 否 1是
+    //Whether the default is 0 no 1 yes
     private Integer isDefault;
 
-    //创建时间
+    //createTime
     @TableField(fill = FieldFill.INSERT)
     private LocalDateTime createTime;
 
 
-    //更新时间
+    //updateTime
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
 
 
-    //创建人
+    //createUser
     @TableField(fill = FieldFill.INSERT)
     private Long createUser;
 
 
-    //修改人
+    //updateUser
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Long updateUser;
 
-    //是否删除
+    //isDeleted
     private Integer isDeleted;
 }
