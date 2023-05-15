@@ -28,7 +28,7 @@ public class JacksonObjectMapper {
 
         this.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        ]
+
         this.getDeserializationConfig().withoutFeatures(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
 
 
