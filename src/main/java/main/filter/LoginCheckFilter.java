@@ -1,4 +1,4 @@
-package com.fubukiss.rikky.filter;
+package main.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.fubukiss.rikky.common.BaseContext;
@@ -52,7 +52,7 @@ public class LoginCheckFilter implements Filter {
         
         // 1. Get the url processed this time
         String requestURI = request.getRequestURI();
-        log.info("请求路径：{}", requestURI);                                        // Slf4j log output
+        log.info("Request path:{}", requestURI);                                        // Slf4j log output
 
         
         // 2. Determine whether this request needs to be processed
@@ -69,7 +69,7 @@ public class LoginCheckFilter implements Filter {
 
         // 3.If no processing is required, release directly
         if (needProcess) {
-            log.info("本次请求{}不需要处理，直接放行", requestURI);                    
+            log.info("This request {} does not need to be processed, just let it go", requestURI);                    
             filterChain.doFilter(request, response);    
             return;                                     
         }
@@ -77,7 +77,7 @@ public class LoginCheckFilter implements Filter {
         // 4-1.Determine the login status of the employee, if it is logged in, then release
         Object employeeId = request.getSession().getAttribute("employee");        
         if (employeeId != null) {
-            log.info("本次请求{}，用户id={}，已登录，直接放行", requestURI, employeeId);   
+            log.info("This request is {}, user id={}, has logged in, and is allowed directly", requestURI, employeeId);   
 
           
             BaseContext.setCurrentId((Long) employeeId);
@@ -88,7 +88,7 @@ public class LoginCheckFilter implements Filter {
 
         // 4-2.Determine the user's login status, if it is logged in, release it
         if (request.getSession().getAttribute("user") != null) {
-            log.info("本次请求{}，用户id={}，已登录，直接放行", requestURI, request.getSession().getAttribute("user"));   // Slf4j的日志输出
+            log.info("This request is {}, user id={}, has logged in, and is allowed directly", requestURI, request.getSession().getAttribute("user"));   // Slf4j的日志输出
 
             Long userId = (Long) request.getSession().getAttribute("user");
             
