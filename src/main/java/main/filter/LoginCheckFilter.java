@@ -36,7 +36,7 @@ The processing logic of this filter:<br>
  */
 @WebFilter(filterName = "loginCheckFilter", urlPatterns = "/*")  // "/*"表示拦截所有请求
 @Slf4j
-public class LoginCheckFilter implements Filter {
+public class    LoginCheckFilter implements Filter {
 
    // path matcher
     public static final AntPathMatcher PATH_MATCHER = new AntPathMatcher();
