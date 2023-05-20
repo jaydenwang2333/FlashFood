@@ -1,9 +1,9 @@
-package main.Mapper;
+package main.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import main.entity.Orders;
+import main.entity.Employee;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface OrdersMapper extends BaseMapper<Orders> {
+public interface EmployeeMapper extends BaseMapper<Employee> {
 }

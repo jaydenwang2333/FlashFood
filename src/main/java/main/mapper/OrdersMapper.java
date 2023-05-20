@@ -1,9 +1,9 @@
-package main.Mapper;
+package main.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import main.entity.Setmeal;
+import main.entity.Orders;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface SetmealMapper extends BaseMapper<Setmeal> {
+public interface OrdersMapper extends BaseMapper<Orders> {
 }

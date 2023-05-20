@@ -5,4 +5,3 @@ import main.entity.SetmealDish;
 
 public interface SetmealDishService extends IService<SetmealDish> {
 }
-
