@@ -39,7 +39,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         count = setmealService.count(setmealLambdaQueryWrapper);
 
         if (count > 0) {
-            throw new CustomException("Packages exist under this category and therefore cannot be deleted");
+            throw new CustomException("Set Meals exist under this category and therefore cannot be deleted");
         }
 
         super.removeById(id);
