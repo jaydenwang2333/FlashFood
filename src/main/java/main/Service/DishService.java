@@ -1,4 +1,4 @@
-package main.Service;
+package main.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
