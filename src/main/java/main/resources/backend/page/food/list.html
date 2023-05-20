@@ -52,9 +52,9 @@
             ></el-table-column>
             <el-table-column
                     prop="name"
-                    label="Dish name"
+                    label="Dish"
             ></el-table-column>
-            <el-table-column prop="image" label="图片" align="center">
+            <el-table-column prop="image" label="Picture" align="center">
                 <template slot-scope="{ row }">
                     <el-image style="width: auto; height: 40px; border:none;cursor: pointer;"
                               :src="getImage(row.image)"
@@ -67,25 +67,25 @@
             </el-table-column>
             <el-table-column
                     prop="categoryName"
-                    label="Dish category"
+                    label="Category"
             ></el-table-column>
             <el-table-column label="Price">
                 <template slot-scope="scope">
                     <span style="margin-right: 10px;">${{ scope.row.price/100 }}</span>
                 </template>
             </el-table-column>
-            <el-table-column label="sale staus">
+            <el-table-column label="Staus">
                 <template slot-scope="scope">
                     <span style="margin-right: 10px;">{{ scope.row.status == '0' ? 'Sold out' : 'sale' }}</span>
                 </template>
             </el-table-column>
             <el-table-column
                     prop="updateTime"
-                    label="Last operate time"
+                    label="Last operate"
             >
             </el-table-column>
             <el-table-column
-                    label="operate"
+                    label="Operate"
                     width="160"
                     align="center"
             >
