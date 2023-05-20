@@ -1,4 +1,4 @@
-package main.Mapper;
+package main.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import main.entity.AddressBook;

@@ -1,9 +1,9 @@
-package main.Mapper;
+package main.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import main.entity.Dish;
+import main.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface DishMapper extends BaseMapper<Dish> {
+public interface UserMapper extends BaseMapper<User> {
 }
