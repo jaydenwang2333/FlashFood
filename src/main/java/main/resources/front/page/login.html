@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
+    <title>FlashFood</title>
+    <link rel="icon" href="./../images/favico.ico">
+    <script src="./../js/base.js"></script>
+    <link rel="stylesheet" href="../../backend/plugins/element-ui/index.css"/>
+    <link rel="stylesheet" href="../styles/vant.min.css"/>
+    <link rel="stylesheet" href="../styles/index.css"/>
+    <link rel="stylesheet" href="./../styles/login.css"/>
+</head>
+<body>
+<div id="login" v-loading="loading">
+    <div class="divHead">Login</div>
+    <div class="divContainer">
+        <el-input placeholder=" Enter email" v-model="form.email" maxlength='50'/>
+        </el-input>
+        <div class="divSplit"></div>
+        <el-input placeholder=" Enter code" v-model="form.code" maxlength='30'/>
+        </el-input>
+        <span @click='getCode'>Get Code</span>
+    </div>
+    <div class="divMsg" v-if="msgFlag">Email format invalid, please re-enter</div>
+    <el-button type="primary" :class="{btnSubmit:1===1,btnNoEmail:!form.email,btnEmail:form.email}" @click="btnLogin">
+        Login
+    </el-button>
+</div>
+<script src="../../backend/plugins/vue/vue.js"></script>
+<script src="../../backend/plugins/element-ui/index.js"></script>
+<script src="./../js/vant.min.js"></script>
+<script src="../../backend/plugins/axios/axios.min.js"></script>
+<script src="./../js/request.js"></script>
+<script src="./../api/login.js"></script>
+</body>
+<script>
+    new Vue({
+        el: "#login",
+        data() {
+            return {
+                form: {
+                    email: '',
+                    code: ''
+                },
+                msgFlag: false,
+                loading: false
+            }
+        },
+        computed: {},
+        created() {
+        },
+        mounted() {
+        },
+        methods: {
+            getCode() {
+                this.form.code = ''
+                const regex = /([a-z]|[0-9])+((\.|\-|_)?([a-z]|[0-9])+)*@[a-z]+(\-?[a-z]+)*(\.[a-z]+(\-?[a-z]+)*)+/;
+                if (regex.test(this.form.email)) {
+                    this.$toast.loading({
+                        message: 'Please wait...',
+                        forbidClick: true,  
+                        duration: 2000 
+                    });
+                    this.msgFlag = false
+                    sendMsgApi({email: this.form.email}).then((res) => {
+                        if (res.code === 1) {
+                            this.$message(
+                                {
+                                    message: "Code had send, please check your email",
+                                    type: 'success'
+                                }
+                            )
+                        } else {
+                            this.$message(
+                                {
+                                    message: "Fail to send code, please re-enter your email",
+                                    type: 'failed'
+                                }
+                            )
+                        }
+                    });
+
+
+                } else {
+                    this.msgFlag = true
+                }
+            },
+            async btnLogin() {
+                if (this.form.email && this.form.code) {
+                    this.loading = true
+                    const res = await loginApi({email: this.form.email, code: this.form.code})
+                    this.loading = false
+                    if (res.code === 1) {
+                        sessionStorage.setItem("userEmail", this.form.email)
+                        window.requestAnimationFrame(() => {
+                            window.location.href = '/front/index.html'
+                        })
+                    } else {
+                        this.$notify({type: 'warning', message: res.msg});
+                    }
+                } else {
+                    this.$notify({type: 'warning', message: 'Enter email and code'});
+                }
+            }
+        }
+    })
+</script>
+</html>
