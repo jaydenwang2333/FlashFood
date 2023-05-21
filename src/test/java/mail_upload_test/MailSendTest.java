@@ -22,7 +22,7 @@ public class MailSendTest {
 
         simpleMailMessage.setFrom("no-reply-me@foxmail.com");
         simpleMailMessage.setSubject("Test");
-        simpleMailMessage.setTo("1105799454@qq.com");
+        simpleMailMessage.setTo("jaydewang@umass.edu");
         simpleMailMessage.setText("test111");
         javaMailSender.send(simpleMailMessage);
     }
