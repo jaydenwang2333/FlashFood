@@ -1,0 +1,57 @@
+server:
+  port: 8080  # default port
+
+
+spring:
+  application:
+    name: FlashFood
+
+
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/flashfood
+    username: root
+    password: Newrun1019
+
+
+
+  mail:
+    host: smtp.gmail.com
+    username:
+    password: fiumwqfyxtemmxvp
+    port: 587
+    default-encoding: UTF-8
+    timeout: 5000
+    properties:
+      mail:
+        smtp:
+          starttls:
+            enable: true
+        debug: true
+
+
+  # redis buffer
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    database: 0
+
+
+# mybatis-plus
+mybatis-plus:
+  configuration:
+
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: ASSIGN_ID
+
+
+
+main:
+
+  linux-path: /Users/wangxiao/Downloads/FlashFood/img  # local file test
+
