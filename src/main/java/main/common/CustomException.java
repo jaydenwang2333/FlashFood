@@ -1,11 +1,11 @@
 package main.common;
 
-public class CustomException {
+
+public class CustomException extends RuntimeException {
     /**
-     * This expection will catch by GlobalExceptionHandler, then return to frontend
+     * This exception will be caught by {@link GlobalExceptionHandler} and returned to the front-end.
      *
-     *
-     * @param message expection message
+     * @param message Exception message
      */
     public CustomException(String message) {
         super(message);
