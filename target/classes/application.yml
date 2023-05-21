@@ -12,7 +12,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/flashfood
     username: root
-    password: Newrun1019
+    password: 12345678
 
 
 
@@ -53,5 +53,5 @@ mybatis-plus:
 
 main:
 
-  linux-path: /Users/wangxiao/Downloads/FlashFood/img  # local file test
+  linux-path: \Users\zhens\Desktop\FlashFood\img  # local file test
 
