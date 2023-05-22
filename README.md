@@ -1,5 +1,5 @@
 # FlashFood
-## overall explanation
+## Overall explanation
 ### This is a course project built by the following group members:
 ### Xiao Wang
 ### Wei Li
@@ -8,7 +8,18 @@
 
 
 <!-- ABOUT THE PROJECT -->
+This project is a food deliver management system for learning the development of Spring Boot. The functions are relatively limited, but there are also some functions, such as:
 
+* User registration
+* User login
+* User address management
+* User order management
+* User shopping cart
+* Staff management
+* Dishes management
+* Dishes classification management
+* Package management
+* Employee order management
 
 The Java version of the project is `jdk8`, the main technologies include `Spring Boot` + `Mybatis Plus`, the database uses `MySQL`, and `Redis` is used to cache and optimize queries.
 
@@ -72,20 +83,6 @@ Or use the developer tools to simulate the mobile browser to open.
 - Backend management system default link: http://localhost:8080/backend/index.html
 - Customer user mobile default link: http://localhost:8080/front/index.html
 
-
-
-This project is a food deliver management system for learning the development of Spring Boot. The functions are relatively limited, but there are also some functions, such as:
-
-* User registration
-* User login
-* User address management
-* User order management
-* User shopping cart
-* Staff management
-* Dishes management
-* Dishes classification management
-* Package management
-* Employee order management
 
 [contributors-shield]: https://img.shields.io/github/contributors/riverify/rikky-takeaway.svg?style=for-the-badge
 
