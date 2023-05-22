@@ -197,9 +197,9 @@
                 }
             },
 
-            // 删除
+
             deleteHandle(type, id) {
-                if (type === '批量' && id === null) {
+                if (type === 'Bulk' && id === null) {
                     if (this.checkList.length === 0) {
                         return this.$message.error('Please select object to delete')
                     }
