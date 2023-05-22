@@ -71,7 +71,7 @@
             ></el-table-column>
             <el-table-column label="Price">
                 <template slot-scope="scope">
-                    <span style="margin-right: 10px;">￥{{ scope.row.price/100 }}</span>
+                    <span style="margin-right: 10px;">${{ scope.row.price/100 }}</span>
                 </template>
             </el-table-column>
             <el-table-column label="Status">
@@ -110,7 +110,7 @@
                             type="text"
                             size="small"
                             class="delBut non"
-                            @click="deleteHandle('单删', scope.row.id)"
+                            @click="deleteHandle('delete', scope.row.id)"
                     >
                         Delete
                     </el-button>
@@ -129,11 +129,8 @@
         ></el-pagination>
     </div>
 </div>
-<!-- 开发环境版本，包含了有帮助的命令行警告 -->
 <script src="../../plugins/vue/vue.js"></script>
-<!-- 引入组件库 -->
 <script src="../../plugins/element-ui/index.js"></script>
-<!-- 引入axios -->
 <script src="../../plugins/axios/axios.min.js"></script>
 <script src="../../js/request.js"></script>
 <script src="../../api/food.js"></script>
@@ -170,7 +167,7 @@
                         this.counts = res.data.total
                     }
                 }).catch(err => {
-                    this.$message.error('请求出错了：' + err)
+                    this.$message.error('Request error：' + err)
                 })
             },
             getImage(image) {
@@ -180,19 +177,18 @@
                 this.page = 1;
                 this.init();
             },
-            // 添加
             addFoodtype(st) {
                 if (st === 'add') {
                     window.parent.menuHandle({
                         id: '4',
                         url: '/backend/page/food/add.html',
-                        name: '添加菜品'
+                        name: 'Add dish'
                     }, true)
                 } else {
                     window.parent.menuHandle({
                         id: '4',
                         url: '/backend/page/food/add.html?id=' + st,
-                        name: 'Modify菜品'
+                        name: 'Modify dish'
                     }, true)
                 }
             },
@@ -201,32 +197,31 @@
             deleteHandle(type, id) {
                 if (type === '' && id === null) {
                     if (this.checkList.length === 0) {
-                        return this.$message.error('请选择Delete对象')
+                        return this.$message.error('select Delete object')
                     }
                 }
-                this.$confirm('确认Delete该菜品, 是否继续?', '确定Delete', {
-                    'confirmButtonText': '确定',
-                    'cancelButtonText': '取消',
+                this.$confirm('Delete this dish, continue?', 'Confirm Delete', {
+                    'confirmButtonText': 'confirm',
+                    'cancelButtonText': 'cancel',
                 }).then(() => {
                     deleteDish(type === '' ? this.checkList.join(',') : id).then(res => {
                         if (res.code === 1) {
-                            this.$message.success('Delete成功！')
+                            this.$message.success('Deleted！')
                             this.handleQuery()
                         } else {
-                            this.$message.error(res.msg || 'Modify失败')
+                            this.$message.error(res.msg || 'Modify failed')
                         }
                     }).catch(err => {
-                        this.$message.error('请求出错了：' + err)
+                        this.$message.error('Error request：' + err)
                     })
                 })
             },
 
-            //状态更改
             statusHandle(row) {
                 let params = {}
                 if (typeof row === 'string') {
                     if (this.checkList.length === 0) {
-                        this.$message.error('Modify，请先勾选Modify菜品！')
+                        this.$message.error('Select modify dish！')
                         return false
                     }
                     params.id = this.checkList.join(',')
@@ -236,26 +231,24 @@
                     params.status = row.status ? '0' : '1'
                 }
                 this.dishState = params
-                this.$confirm('确认更改该菜品状态?', '提示', {
-                    'confirmButtonText': '确定',
-                    'cancelButtonText': '取消',
+                this.$confirm('Change dish status?', 'notice', {
+                    'confirmButtonText': 'confirm',
+                    'cancelButtonText': 'cancel',
                     'type': 'warning'
                 }).then(() => {
-                    // 起售Down---起售Down接口
                     dishStatusByStatus(this.dishState).then(res => {
                         if (res.code === 1) {
-                            this.$message.success('菜品状态已经更改成功！')
+                            this.$message.success('Status changed！')
                             this.handleQuery()
                         } else {
-                            this.$message.error(res.msg || 'Modify失败')
+                            this.$message.error(res.msg || 'Modify failed')
                         }
                     }).catch(err => {
-                        this.$message.error('请求出错了：' + err)
+                        this.$message.error('Error request：' + err)
                     })
                 })
             },
 
-            // 全部Modify
             handleSelectionChange(val) {
                 let checkArr = []
                 val.forEach((n) => {

@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- 引入样式 -->
     <link rel="stylesheet" href="../../plugins/element-ui/index.css"/>
     <link rel="stylesheet" href="../../styles/common.css"/>
     <link rel="stylesheet" href="../../styles/page.css"/>
@@ -50,7 +49,6 @@
 <body>
 <div class="dashboard-container" id="order-app" v-loading="loading">
     <div class="container">
-        <!-- 搜索项 -->
         <div class="tableBar">
             <el-input v-model="input" placeholder="Enter Order#" style="width: 250px">
                 <i slot="prefix" class="el-input__icon el-icon-search" style="cursor: pointer" @click="init"></i>
@@ -59,7 +57,7 @@
                             clearable
                             value-format="yyyy-MM-dd HH:mm:ss"
                             type="datetimerange"
-                            placeholder="选择日期"
+                            placeholder="Select date"
                             range-separator="TO"
                             start-placeholder="StartTime"
                             end-placeholder="EndTime"
@@ -81,23 +79,23 @@
             <el-table-column prop="orderTime" label="TimeStamp" min-width="100"></el-table-column>
             <el-table-column prop="amount" label="MONEY!!!">
                 <template slot-scope="{ row }">
-                    <span>￥{{ row.amount }}</span>
+                    <span>${{ row.amount }}</span>
                 </template>
             </el-table-column>
             <el-table-column prop="btn" label="Modify">
                 <template slot-scope="{ row }">
                     <el-button type="text" @click="goDetail(row)" class="blueBug">
-                        查看
+                        View
                     </el-button>
                     <el-divider v-if="row.status === 2" direction="vertical"></el-divider>
                     <el-button v-if="row.status === 2" type="text" @click="cancelOrDeliveryOrComplete(3, row.id)"
                                class="blueBug">
-                        派送
+                        Delivery
                     </el-button>
                     <el-divider v-if="row.status === 3" direction="vertical"></el-divider>
                     <el-button v-if="row.status === 3" type="text" @click="cancelOrDeliveryOrComplete(4, row.id)"
                                class="blueBug">
-                        完成
+                        Complete
                     </el-button>
                 </template>
             </el-table-column>
@@ -114,7 +112,6 @@
         ></el-pagination>
     </div>
 
-    <!-- 查看弹框部分 -->
     <el-dialog
             title="Order Details"
             :visible.sync="dialogVisible"
@@ -131,11 +128,11 @@
                 <span class="des">{{ getOrderType(diaForm) }}</span>
             </div>
             <div class="item-box">
-                <span class="label">收货人：</span>
+                <span class="label">Consignee：</span>
                 <span class="des">{{ diaForm.consignee }}</span>
             </div>
             <div class="item-box">
-                <span class="label">联系电话：</span>
+                <span class="label">Phone：</span>
                 <span class="des">{{ diaForm.phone }}</span>
             </div>
             <div class="item-box">
@@ -143,7 +140,7 @@
                 <span class="des">{{ diaForm.address }}</span>
             </div>
             <div class="item-box">
-                <span class="label">支付金额：</span>
+                <span class="label">Payment：</span>
                 <span class="des">{{ diaForm.amount }}</span>
             </div>
             <div class="item-box">
@@ -151,39 +148,11 @@
                 <span class="des">{{ diaForm.orderTime }}</span>
             </div>
         </div>
-        <!-- <el-form ref="diaForm" :model="diaForm" class="dia-form">
-          <el-form-item label="Order#">
-            <span>{{ diaForm.number }}</span>
-          </el-form-item>
-          <el-form-item label="Status">
-            <span>{{ getOrderType(diaForm) }}</span>
-          </el-form-item>
-          <el-form-item label="收货人">
-            <span>{{ diaForm.consignee }}</span>
-          </el-form-item>
-          <el-form-item label="联系电话">
-            <span>{{ diaForm.phone }}</span>
-          </el-form-item>
-          <el-form-item label="Location">
-            <span>{{ diaForm.address }}</span>
-          </el-form-item>
-          <el-form-item label="支付金额">
-            <span>{{ diaForm.amount }}</span>
-          </el-form-item>
-          <el-form-item label="TimeStamp">
-            <span>{{ diaForm.orderTime }}</span>
-          </el-form-item>
-        </el-form>
-        <span slot="footer" class="dialog-footer">
-          <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
-        </span> -->
+ 
     </el-dialog>
 </div>
-<!-- 开发环境版本，包含了有帮助的命令行警告 -->
 <script src="../../plugins/vue/vue.js"></script>
-<!-- 引入组件库 -->
 <script src="../../plugins/element-ui/index.js"></script>
-<!-- 引入axios -->
 <script src="../../plugins/axios/axios.min.js"></script>
 <script src="../../js/request.js"></script>
 <script src="../../api/order.js"></script>
@@ -237,7 +206,7 @@
                         this.counts = res.data.total
                     }
                 }).catch(err => {
-                    this.$message.error('请求出错了：' + err)
+                    this.$message.error('Request error：' + err)
                 })
             },
             handleQuery() {
@@ -248,46 +217,44 @@
                 let str = ''
                 switch (row.status) {
                     case 1:
-                        str = '待付款'
+                        str = 'Wait payment'
                         break;
                     case 2:
-                        str = '正在派送'
+                        str = 'Delivering'
                         break;
                     case 3:
-                        str = '已派送'
+                        str = 'Delivered'
                         break;
                     case 4:
-                        str = '已完成'
+                        str = 'Completed'
                         break;
                     case 5:
-                        str = '已取消'
+                        str = 'Canceled'
                         break;
 
                 }
                 return str
             },
-            // 查看详情
             goDetail(row) {
                 this.diaForm = {}
                 this.dialogVisible = true
                 this.diaForm = {...row}
             },
-            // 取消，派送，完成
             cancelOrDeliveryOrComplete(status, id) {
-                this.$confirm('确认更改该Status?', '提示', {
-                    'confirmButtonText': '确定',
-                    'cancelButtonText': '取消',
+                this.$confirm('Change Status?', 'Notice', {
+                    'confirmButtonText': 'confirm',
+                    'cancelButtonText': 'cancel',
                     'type': 'warning'
                 }).then(() => {
                     editOrderDetail(params).then(res => {
                         if (res.code === 1) {
-                            this.$message.success(status === 3 ? '订单已派送' : '订单已完成')
+                            this.$message.success(status === 3 ? 'Order deliverd' : 'Order completed')
                             this.init()
                         } else {
-                            this.$message.error(res.msg || 'Modify失败')
+                            this.$message.error(res.msg || 'Modify failed')
                         }
                     }).catch(err => {
-                        this.$message.error('请求出错了：' + err)
+                        this.$message.error('Request error：' + err)
                     })
                 })
                 const params = {
