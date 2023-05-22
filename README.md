@@ -1,11 +1,6 @@
 # FlashFood
 ## Overall explanation
-### This is a course project built by the following group members:
-### Xiao Wang
-### Wei Li
-### Xinpeng Liu
-### Jayden Wang
-
+### This is a course project built by the following group members: Xiao Wang, Wei Li, Xinpeng Liu, Jayden Wang
 
 <!-- ABOUT THE PROJECT -->
 This project is a food deliver management system for learning the development of Spring Boot. The functions are relatively limited, but there are also some functions, such as:
