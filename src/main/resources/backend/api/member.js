@@ -1,4 +1,4 @@
-
+// 查询---加载员工列表
 function getMemberList(params) {
     return $axios({
         url: '/employee/page',
@@ -7,7 +7,7 @@ function getMemberList(params) {
     })
 }
 
-
+// Modify---启用BAN接口
 function enableOrDisableEmployee(params) {
     return $axios({
         url: '/employee',
@@ -16,7 +16,7 @@ function enableOrDisableEmployee(params) {
     })
 }
 
-
+// Add---ADD NEW
 function addEmployee(params) {
     return $axios({
         url: '/employee',
@@ -25,7 +25,7 @@ function addEmployee(params) {
     })
 }
 
-
+// Modify---ADD NEW
 function editEmployee(params) {
     return $axios({
         url: '/employee',
@@ -34,7 +34,7 @@ function editEmployee(params) {
     })
 }
 
-
+// ModifyPage面反查详情接口
 function queryEmployeeById(id) {
     return $axios({
         url: `/employee/${id}`,

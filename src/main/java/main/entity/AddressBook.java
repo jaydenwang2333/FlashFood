@@ -33,15 +33,17 @@ public class AddressBook implements Serializable {
     private String sex;
 
 
-    //provinceCode
-    private String provinceCode;
+    //StateCode
+    @TableField(exist = false)
+    private String StateCode;
 
 
-    //provinceName
-    private String provinceName;
+    //StateName
+    private String StateName;
 
 
     //cityCode
+    @TableField(exist = false)
     private String cityCode;
 
 
@@ -50,10 +52,12 @@ public class AddressBook implements Serializable {
 
 
     //districtCode
+    @TableField(exist = false)
     private String districtCode;
 
 
     //districtName
+    @TableField(exist = false)
     private String districtName;
 
 

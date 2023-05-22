@@ -55,7 +55,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
         simpleMailMessage.setSubject("Login Verification Code");
 
-        simpleMailMessage.setText("Welcome to our takeaway platform.\nYour verification code is：" + code + "Please use in " + TIME_OUT_MINUTES + ".");
+        simpleMailMessage.setText("Welcome to our takeaway platform.\nYour verification code is：" + code + " Please use in" + TIME_OUT_MINUTES + " minutes.");
         redisTemplate.opsForValue().set(email, code, TIME_OUT_MINUTES, java.util.concurrent.TimeUnit.MINUTES);
 
         try {

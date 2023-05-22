@@ -14,23 +14,23 @@ function isCellPhone(val) {
     }
 }
 
-
+//校验账号
 function checkUserName(rule, value, callback) {
     if (value == "") {
-        callback(new Error("Please enter account"))
+        callback(new Error("Enter User Account"))
     } else if (value.length > 20 || value.length < 3) {
-        callback(new Error("account length should be 3-20"))
+        callback(new Error("The length should be between 3 and 20."))
     } else {
         callback()
     }
 }
 
-
+//校验姓名
 function checkName(rule, value, callback) {
     if (value == "") {
-        callback(new Error("Please enter your name"))
+        callback(new Error("Enter Name"))
     } else if (value.length > 12) {
-        callback(new Error("your name should be 1-12"))
+        callback(new Error("The length should be between 1 and 12"))
     } else {
         callback()
     }
@@ -39,8 +39,8 @@ function checkName(rule, value, callback) {
 function checkPhone(rule, value, callback) {
     // let phoneReg = /(^1[3|4|5|6|7|8|9]\d{9}$)|(^09\d{8}$)/;
     if (value == "") {
-        callback(new Error("Please enter your phone number"))
-    } else if (!isCellPhone(value)) {
+        callback(new Error("Enter phone number"))
+    } else if (!isCellPhone(value)) {//引入methods中封装的检查手机格式的方法
         callback(new Error("Please enter a valid phone number!"))
     } else {
         callback()
@@ -49,13 +49,13 @@ function checkPhone(rule, value, callback) {
 
 
 function validID(rule, value, callback) {
-
+    // 身份证号码为15位或者18位，15位时全为数字，18位前17位为数字，最后一位是校验位，可能为数字或字符X
     let reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
     if (value == '') {
-        callback(new Error('Please enter your ID'))
+        callback(new Error('Enter ID number'))
     } else if (reg.test(value)) {
         callback()
     } else {
-        callback(new Error('ID number is incorrect'))
+        callback(new Error('Invalid ID'))
     }
 }

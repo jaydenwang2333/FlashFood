@@ -100,7 +100,7 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         orders.setUserName(user.getName());
         orders.setConsignee(addressBook.getConsignee());
         orders.setPhone(addressBook.getPhone());
-        orders.setAddress((addressBook.getProvinceName() == null ? "" : addressBook.getProvinceName())
+        orders.setAddress((addressBook.getStateName() == null ? "" : addressBook.getStateName())
                 + (addressBook.getCityName() == null ? "" : addressBook.getCityName())
                 + (addressBook.getDistrictName() == null ? "" : addressBook.getDistrictName())
                 + (addressBook.getDetail() == null ? "" : addressBook.getDetail()));

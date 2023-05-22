@@ -4,9 +4,9 @@
     <meta charset="UTF-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>FlashFood Application</title>
+    <title>ManageUFood</title>
     <link rel="shortcut icon" href="favicon.ico">
-
+    <!-- 引入样式 -->
     <link rel="stylesheet" href="plugins/element-ui/index.css"/>
     <link rel="stylesheet" href="styles/common.css"/>
     <link rel="stylesheet" href="styles/index.css"/>
@@ -46,9 +46,9 @@
                         text-color="#bfcbd9"
                         active-text-color="#f4f4f5"
                 >
-                    <!-- 显示侧边栏 -->
+                    <!-- Show sidebar -->
                     <div v-for="item in menuList" :key="item.id">
-                        <el-submenu :index="item.id" v-if="item.children && item.children.length>0"> <!-- 有子菜单 -->
+                        <el-submenu :index="item.id" v-if="item.children && item.children.length>0"> <!-- with submenu -->
                             <template slot="title">
                                 <i class="iconfont" :class="item.icon"></i>
                                 <span>{{item.name}}</span>
@@ -65,7 +65,7 @@
                             >
                         </el-submenu>
                         <el-menu-item v-else :index="item.id" @click="menuHandle(item,false)">
-                            <!-- 没有子菜单，执行menuHandle方法 -->
+                            <!-- No submenu, execute menuHandle method -->
                             <i class="iconfont" :class="item.icon"></i>
                             <span slot="title">{{item.name}}</span>
                         </el-menu-item>
@@ -78,14 +78,14 @@
             <div class="navbar">
                 <div class="head-lable">
               <span v-if="goBackFlag" class="goBack" @click="goBack()"
-              ><img src="images/icons/btn_back@2x.png" alt=""/> 返回</span
+              ><img src="images/icons/btn_back@2x.png" alt=""/> Return</span
               >
                     <span>{{headTitle}}</span>
                 </div>
                 <div class="right-menu">
                     <div class="avatar-wrapper">{{ userInfo.name }}</div>
-                    <!-- <div class="logout" @click="logout">退出</div> -->
-                    <img src="images/icons/btn_close@2x.png" class="outLogin" alt="退出" @click="logout"/>
+                    <!-- <div class="logout" @click="logout">Quit</div> -->
+                    <img src="images/icons/btn_close@2x.png" class="outLogin" alt="Quit" @click="logout"/>
                 </div>
             </div>
             <div class="app-main" v-loading="loading">
@@ -104,11 +104,11 @@
         </div>
     </div>
 </div>
-
+<!-- Development environment version with helpful command line warnings -->
 <script src="plugins/vue/vue.js"></script>
-
+<!-- Introduction of component libraries -->
 <script src="plugins/element-ui/index.js"></script>
-
+<!-- axios -->
 <script src="plugins/axios/axios.min.js"></script>
 <script src="js/request.js"></script>
 <script src="./api/login.js"></script>
@@ -122,46 +122,40 @@
                 menuActived: '2',
                 userInfo: {},
                 menuList: [
-                    // {
-                    //   id: '1',
-                    //   name: 'Restaurant management',
-                    //   children: [
                     {
                         id: '2',
-                        name: 'employee management',
+                        name: 'Employee',
                         url: 'page/member/list.html',
                         icon: 'icon-member'
                     },
                     {
                         id: '3',
-                        name: 'Category management',
+                        name: 'Category',
                         url: 'page/category/list.html',
                         icon: 'icon-category'
                     },
                     {
                         id: '4',
-                        name: 'Dishes management',
+                        name: 'Dish',
                         url: 'page/food/list.html',
                         icon: 'icon-food'
                     },
-                    {
-                        id: '5',
-                        name: 'meal set management',
-                        url: 'page/combo/list.html',
-                        icon: 'icon-combo'
-                    },
+                    // {
+                    //     id: '5',
+                    //     name: 'SetMeal',
+                    //     url: 'page/combo/list.html',
+                    //     icon: 'icon-combo'
+                    // },
                     {
                         id: '6',
-                        name: 'Order Details',
+                        name: 'Order',
                         url: 'page/order/list.html',
                         icon: 'icon-order'
                     }
-                    //   ],
-                    // },
                 ],
 
                 iframeUrl: 'page/member/list.html',
-                headTitle: 'employee management',
+                headTitle: 'Employee',
                 goBackFlag: false,
                 loading: true,
                 timer: null
@@ -169,9 +163,9 @@
         },
         computed: {},
         created() {
-            const userInfo = window.localStorage.getItem('userInfo')
+            const userInfo = window.localStorage.getItem('userInfo') // Get user information from localStorage
             if (userInfo) {
-                this.userInfo = JSON.parse(userInfo)
+                this.userInfo = JSON.parse(userInfo) // Store the userInfo in the vue instance
             }
             this.closeLoading()
         },
@@ -184,7 +178,7 @@
         },
         methods: {
             logout() {
-                // quit
+                // Quit Login
                 logoutApi().then((res) => {
                     if (res.code === 1) {
                         localStorage.removeItem('userInfo')

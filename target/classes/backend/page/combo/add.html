@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Document</title>
-
+    <!-- 引入样式 -->
     <link rel="stylesheet" href="../../plugins/element-ui/index.css"/>
     <link rel="stylesheet" href="../../styles/common.css"/>
     <link rel="stylesheet" href="../../styles/page.css"/>
@@ -203,47 +203,47 @@
                 class="demo-ruleForm"
         >
             <div>
-                <el-form-item label="Meal set Name:" prop="name">
-                    <el-input v-model="ruleForm.name" placeholder="Please enter meal set name" maxlength="20"/>
+                <el-form-item label="套餐名称:" prop="name">
+                    <el-input v-model="ruleForm.name" placeholder="请填写套餐名称" maxlength="20"/>
                 </el-form-item>
-                <el-form-item label="Meal set category :" prop="idType">
-                    <el-select v-model="ruleForm.idType" placeholder="Please select a Meal set category" @change="$forceUpdate()">
+                <el-form-item label="套餐分类:" prop="idType">
+                    <el-select v-model="ruleForm.idType" placeholder="请选择套餐分类" @change="$forceUpdate()">
                         <el-option v-for="(item, index) in setMealList" :key="index" :label="item.name"
                                    :value="item.id"/>
                     </el-select>
                 </el-form-item>
             </div>
             <div>
-                <el-form-item label="Meal set Price:" prop="price">
-                    <el-input v-model="ruleForm.price" placeholder="Please set the Meal set price"/>
+                <el-form-item label="套餐价格:" prop="price">
+                    <el-input v-model="ruleForm.price" placeholder="请设置套餐价格"/>
                 </el-form-item>
             </div>
             <div>
-                <el-form-item label="Meal set name:" class="setmealFood">
+                <el-form-item label="套餐菜品:" class="setmealFood">
                     <el-form-item>
                         <div class="addDish">
-                            <span v-if="dishTable.length == 0" class="addBut" @click="openAddDish"> + Add dish</span>
+                            <span v-if="dishTable.length == 0" class="addBut" @click="openAddDish"> + 添加菜品</span>
                             <div v-if="dishTable.length != 0" class="content">
-                                <div class="addBut" style="margin-bottom: 20px" @click="openAddDish">+ Add dish</div>
+                                <div class="addBut" style="margin-bottom: 20px" @click="openAddDish">+ 添加菜品</div>
                                 <div class="table">
                                     <el-table :data="dishTable" style="width: 100%">
-                                        <el-table-column prop="name" label="Name" width="180"
+                                        <el-table-column prop="name" label="名称" width="180"
                                                          align="center"></el-table-column>
-                                        <el-table-column prop="price" label="Price" width="180">
+                                        <el-table-column prop="price" label="原价" width="180">
                                             <template slot-scope="scope"> {{ Number(scope.row.price) / 100 }}</template>
                                         </el-table-column>
-                                        <el-table-column prop="address" label="number of dishes" align="center">
+                                        <el-table-column prop="address" label="份数" align="center">
                                             <template slot-scope="scope">
                                                 <el-input-number
                                                         v-model="scope.row.copies"
                                                         size="small"
                                                         :min="1"
                                                         :max="99"
-                                                        label="Description"
+                                                        label="描述文字"
                                                 ></el-input-number>
                                             </template>
                                         </el-table-column>
-                                        <el-table-column prop="address" label="operation" width="180px;" align="center">
+                                        <el-table-column prop="address" label="Modify" width="180px;" align="center">
                                             <template slot-scope="scope">
                                                 <el-button type="text" size="small"
                                                            @click="delDishHandle(scope.$index)"> Delete
@@ -258,7 +258,7 @@
                 </el-form-item>
             </div>
             <div>
-                <el-form-item label="Meal set picture:" class="uploadImg">
+                <el-form-item label="套餐Picture:" class="uploadImg">
                     <el-upload
                             class="avatar-uploader"
                             action="/common/upload"
@@ -273,29 +273,29 @@
                 </el-form-item>
             </div>
             <div class="address">
-                <el-form-item label="Meal set description:">
-                    <el-input v-model="ruleForm.description" type="textarea" :rows="3" placeholder="Max length: 200 words"
+                <el-form-item label="套餐描述:">
+                    <el-input v-model="ruleForm.description" type="textarea" :rows="3" placeholder="套餐描述，最长200字"
                               maxlength="200"/>
                 </el-form-item>
             </div>
             <div class="subBox address">
                 <el-form-item>
-                    <el-button @click="goBack()"> Cancel</el-button>
-                    <el-button type="primary" @click="submitForm('ruleForm', false)"> Save</el-button>
+                    <el-button @click="goBack()"> 取消</el-button>
+                    <el-button type="primary" @click="submitForm('ruleForm', false)"> 保存</el-button>
                     <el-button
                             v-if="actionType == 'add'"
                             type="primary"
                             class="continue"
                             @click="submitForm('ruleForm', true)"
                     >
-                        Save and continue adding
+                        保存并继续添加套餐
                     </el-button>
                 </el-form-item>
             </div>
         </el-form>
     </div>
     <el-dialog
-            title="Add dish"
+            title="添加菜品"
             class="addDishList"
             :visible.sync="dialogVisible"
             width="60%"
@@ -304,7 +304,7 @@
         <el-input
                 v-model="value"
                 class="seachDish"
-                placeholder="Please enter the dish name for searching"
+                placeholder="Enter DishName进行搜索"
                 style="width: 250px"
                 size="small"
                 clearable
@@ -329,7 +329,7 @@
                 <div class="tabList">
                     <div class="table">
                         <div v-if="dishAddList.length == 0" style="padding-left:10px">
-                            No dishes yet!
+                            暂无菜品!
                         </div>
                         <el-checkbox-group
                                 v-if="dishAddList.length > 0"
@@ -347,7 +347,7 @@
                                 >
                                     <div class="item">
                                         <span style="flex: 3;text-align: left">{{ item.dishName }}</span>
-                                        <span>{{ item.status == 0 ? 'Out of stock' : 'Instock' }}</span>
+                                        <span>{{ item.status == 0 ? 'Down' : '在售' }}</span>
                                         <span>{{ Number(item.price)/100 }}</span>
                                     </div>
                                 </el-checkbox>
@@ -358,7 +358,7 @@
             </div>
             <div class="ritCont">
                 <div class="tit">
-                    Selected dish({{ checkedList.length }})
+                    已选菜品({{ checkedList.length }})
                 </div>
                 <div class="items">
                     <div
@@ -383,16 +383,16 @@
         </div>
 
         <span slot="footer" class="dialog-footer">
-          <el-button @click="handleClose">Cancel</el-button>
-          <el-button type="primary" @click="addTableList">Confirm</el-button>
+          <el-button @click="handleClose">取 消</el-button>
+          <el-button type="primary" @click="addTableList">确 定</el-button>
         </span>
     </el-dialog>
 </div>
-
+<!-- 开发环境版本，包含了有帮助的命令行警告 -->
 <script src="../../plugins/vue/vue.js"></script>
-
+<!-- 引入组件库 -->
 <script src="../../plugins/element-ui/index.js"></script>
-
+<!-- 引入axios -->
 <script src="../../plugins/axios/axios.min.js"></script>
 <script src="../../js/request.js"></script>
 <script src="../../api/combo.js"></script>
@@ -405,6 +405,7 @@
         data() {
             return {
                 id: '',
+                actionType: '',
                 value: '',
                 setMealList: [],
                 seachKey: '',
@@ -438,30 +439,30 @@
                 return {
                     name: {
                         required: true,
-                        message: 'Please enter meal set name',
+                        message: 'Enter 套餐名称',
                         trigger: 'blur',
                     },
                     idType: {
                         required: true,
-                        message: 'Please select a meal set category',
+                        message: '请选择套餐分类',
                         trigger: 'change',
                     },
                     price: {
                         required: true,
-                        // 'message': 'Please enter the price',
+                        // 'message': 'Enter 套餐价格',
                         validator: (rules, value, callback) => {
                             if (!value) {
-                                callback(new Error('Please enter dish price'))
+                                callback(new Error('请填写菜品价格'))
                             } else {
                                 const reg = /^\d+(\.\d{0,2})?$/
                                 if (reg.test(value)) {
                                     if (value < 10000) {
                                         callback()
                                     } else {
-                                        callback(new Error('The price is less than 10000'))
+                                        callback(new Error('菜品价格小于10000'))
                                     }
                                 } else {
-                                    callback(new Error('Only number and most two decimal number'))
+                                    callback(new Error('菜品价格格式只能为数字,且最多保留两位小数'))
                                 }
                             }
                         },
@@ -504,44 +505,44 @@
                         this.ruleForm.idType = res.data.categoryId
                         // this.ruleForm.password = ''
                     } else {
-                        this.$message.error(res.msg || 'operation failed')
+                        this.$message.error(res.msg || 'Modify失败')
                     }
                 })
             },
             seachHandle() {
                 this.seachKey = this.value
             },
-
+            // 获取套餐分类
             getDishTypeList() {
                 getCategoryList({type: 2, page: 1, pageSize: 1000}).then((res) => {
                     if (res.code === 1) {
                         this.setMealList = res.data.map((obj) => ({...obj, idType: obj.id}))
                     } else {
-                        this.$message.error(res.msg || 'operation failed')
+                        this.$message.error(res.msg || 'Modify失败')
                     }
                 })
             },
-
+            // Delete套餐菜品
             delDishHandle(index) {
                 this.dishTable.splice(index, 1)
                 this.checkList.splice(index, 1)
             },
 
-
+            // 获取添加菜品数据
             getCheckList(value) {
                 this.checkList = [...value]
             },
 
-
+            // 添加菜品
             openAddDish() {
                 this.seachKey = ''
                 this.dialogVisible = true
-
+                //搜索Listing件清空，菜品重新查询，菜品类别选第一个重新查询
                 this.value = ''
                 this.keyInd = 0
                 this.getDishList(this.dishType[0].id)
             },
-
+            // 取消添加菜品
             handleClose(done) {
                 // this.$refs.adddish.close()
                 this.dialogVisible = false
@@ -549,14 +550,14 @@
                 // this.dialogVisible = false
             },
 
-
+            // 保存添加菜品列表
             addTableList() {
                 this.dishTable = JSON.parse(JSON.stringify(this.checkList))
                 this.dishTable.forEach((n) => {
                     n.copies = 1
                 })
                 this.dialogVisible = false
-
+                // 添加处理逻辑清空选中list
                 this.checkList = []
             },
             submitForm(formName, st) {
@@ -573,11 +574,11 @@
                         prams.status = this.ruleForm ? 1 : 0
                         prams.categoryId = this.ruleForm.idType
                         if (prams.setmealDishes.length < 1) {
-                            this.$message.error('Pleas select dishes！')
+                            this.$message.error('请选择菜品！')
                             return
                         }
                         if (!this.imageUrl) {
-                            this.$message.error('Please upload picture')
+                            this.$message.error('请上传套餐Picture')
                             return
                         }
                         // delete prams.dishList
@@ -586,7 +587,7 @@
                             addSetmeal(prams)
                                 .then((res) => {
                                     if (res.code === 1) {
-                                        this.$message.success('Meal set added successfully！')
+                                        this.$message.success('套餐添加成功！')
                                         if (!st) {
                                             this.goBack()
                                         } else {
@@ -608,25 +609,25 @@
                                             this.imageUrl = ''
                                         }
                                     } else {
-                                        this.$message.error(res.msg || 'operation failed')
+                                        this.$message.error(res.msg || 'Modify失败')
                                     }
                                 })
                                 .catch((err) => {
-                                    this.$message.error('request error：' + err)
+                                    this.$message.error('请求出错了：' + err)
                                 })
                         } else {
                             delete prams.updateTime
                             editSetmeal(prams)
                                 .then((res) => {
                                     if (res.code === 1) {
-                                        this.$message.success('Meal set modified successfully！')
+                                        this.$message.success('套餐Modify成功！')
                                         this.goBack()
                                     } else {
-                                        this.$message.error(res.msg || 'operation failed')
+                                        this.$message.error(res.msg || 'Modify失败')
                                     }
                                 })
                                 .catch((err) => {
-                                    this.$message.error('request error：' + err)
+                                    this.$message.error('请求出错了：' + err)
                                 })
                         }
                     } else {
@@ -636,7 +637,7 @@
             },
             handleAvatarSuccess(response, file, fileList) {
                 // this.imageUrl = response.data
-                if (response.code === 0 && response.msg === 'not logged in') {
+                if (response.code === 0 && response.msg === '未登录') {
                     window.top.location.href = '/backend/page/login/login.html'
                 } else {
                     this.imageUrl = `/common/download?name=${response.data}`
@@ -649,12 +650,12 @@
                     const suffix = file.name.split('.')[1]
                     const size = file.size / 1024 / 1024 < 2
                     if (['png', 'jpeg', 'jpg'].indexOf(suffix) < 0) {
-                        this.$message.error('Only supports png、jpeg、jpg！')
+                        this.$message.error('上传Picture只支持 png、jpeg、jpg 格式！')
                         this.$refs.upload.clearFiles()
                         return false
                     }
                     if (!size) {
-                        this.$message.error('file size cannot exceed 2MB!')
+                        this.$message.error('上传文件大小不能超过 2MB!')
                         return false
                     }
                     return file
@@ -665,12 +666,12 @@
                     {
                         id: '5',
                         url: '/backend/page/combo/list.html',
-                        name: 'Meal set',
+                        name: '套餐管理',
                     },
                     false
                 )
             },
-
+            // 获取套餐分类
             getDishType() {
                 getCategoryList({'type': 1}).then(res => {
                     if (res.code === 1) {
@@ -682,7 +683,7 @@
                 })
             },
 
-
+            // 通过套餐ID获取菜品列表分类
             getDishList(id) {
                 queryDishList({categoryId: id}).then(res => {
                     if (res.code === 1) {
@@ -704,7 +705,7 @@
                 })
             },
 
-
+            // 关键词收搜菜品列表分类
             getDishForName(name) {
                 queryDishList({name}).then(res => {
                     if (res.code === 1) {
@@ -737,7 +738,7 @@
                 this.checkList = this.dishListCache
             },
 
-
+            // Delete
             delCheck(ind) {
                 this.checkedList.splice(ind, 1)
             }

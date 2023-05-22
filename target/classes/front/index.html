@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- The above 3 meta tags *must* come first, and any other content *must* follow! -->
+    <!-- The 3 meta tags above *must* be placed at the top, and anything else *must* follow! -->
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
-    <title>Ufood</title>
+    <title>UFood</title>
     <link rel="icon" href="images/favico.ico">
     <!--Root font settings for different screen sizes-->
     <script src="./js/base.js"></script>
-    <!--element-style of ui-->
+    <!--element-ui style-->
     <link rel="stylesheet" href="../backend/plugins/element-ui/index.css"/>
-    <!--vant style-->
+    <!--Introducing the vant style-->
     <link rel="stylesheet" href="styles/vant.min.css"/>
-    <!-- import style  -->
+    <!--Introduce style-->
     <link rel="stylesheet" href="styles/index.css"/>
-    <!--Styles for the content of this page-->
+    <!--Style of the content on this page-->
     <link rel="stylesheet" href="styles/main.css"/>
 </head>
 <body>
@@ -28,16 +28,16 @@
         <div class="divStatic">
             <img src="./images/logo.png" class="logo"/>
             <div class="divDesc">
-                <div class="divName">Ufood</div>
+                <div class="divName">UFood</div>
                 <div class="divSend">
-                    <span><img src="./images/time.png"/> distance 11.4km</span>
-                    <span><img src="./images/money.png"/> Delivery fee 5</span>
-                    <span><img src="./images/location.png"/> Estimated duration 58min</span>
+                    <span><img src="./images/time.png"/> Distance:2miles</span>
+                    <span><img src="./images/money.png"/> DeliveryFee:$5</span>
+                    <span><img src="./images/location.png"/> EstimatedTime:30min</span>
                 </div>
             </div>
         </div>
         <div class="divDesc">
-            Introduction: UFOOD is a software that helps students deliver meals in schools.
+            Description:The UFood provides online ordering service.
         </div>
     </div>
     <div class="divBody">
@@ -59,16 +59,15 @@
                     <div>
                         <div class="divName">{{item.name}}</div>
                         <div class="divDesc">{{item.description}}</div>
-                        <div class="divDesc">{{'monthly sales' + (item.saleNum ? item.saleNum : 0) }}</div>
-                        <div class="divBottom"><span>$</span><span>{{item.price/100}}</span></div>
+                        <div class="divDesc">{{'Monthly Sold' + (item.saleNum ? item.saleNum : 0) }}</div>
+                        <div class="divBottom"><span>￥</span><span>{{item.price/100}}</span></div>
                         <div class="divNum">
                             <div class="divSubtract" v-if="item.number > 0">
                                 <img src="./images/subtract.png" @click.prevent.stop="subtractCart(item)"/>
                             </div>
                             <div class="divDishNum">{{item.number}}</div>
                             <div class="divTypes" v-if="item.flavors && item.flavors.length > 0 && !item.number "
-                                 @click.prevent.stop="chooseFlavorClick(item)">Select specifications
-
+                                 @click.prevent.stop="chooseFlavorClick(item)">Choose
                             </div>
                             <div class="divAdd" v-else>
                                 <img src="./images/add.png" @click.prevent.stop="addCart(item)"/>
@@ -91,12 +90,12 @@
              v-if="cartData && cartData.length > 0">{{ goodsNum }}
         </div>
         <div class="divNum">
-            <span>$</span>
+            <span>￥</span>
             <span>{{goodsPrice}}</span>
         </div>
         <div class="divPrice"></div>
         <div :class="{btnSubmitActive: cartData && cartData.length > 0, btnSubmit:!cartData || cartData.length<1}"
-             @click="toAddOrderPage">to settle
+             @click="toAddOrderPage">Checkout
         </div>
     </div>
     <van-dialog v-model="dialogFlavor.show" :show-confirm-button="false" class="dialogFlavor" ref="flavorDialog">
@@ -112,8 +111,8 @@
             </div>
         </div>
         <div class="divBottom">
-            <div><span class="spanMoney">$</span>{{dialogFlavor.price/100}}</div>
-            <div @click="dialogFlavorAddCart">add to the cart</div>
+            <div><span class="spanMoney">￥</span>{{dialogFlavor.price/100}}</div>
+            <div @click="dialogFlavorAddCart">AddToCart</div>
         </div>
         <div class="divFlavorClose" @click="dialogFlavor.show = false">
             <img src="./images/close.png"/>
@@ -121,9 +120,9 @@
     </van-dialog>
     <van-popup v-model="cartDialogShow" position="bottom" :style="{ height: '50%' }" class="dialogCart">
         <div class="divCartTitle">
-            <div class="title">shopping cart</div>
+            <div class="title">Cart</div>
             <div class="clear" @click="clearCart">
-                <i class="el-icon-delete"></i> Clear
+                <i class="el-icon-delete"></i> EmptyTheCart
             </div>
         </div>
         <div class="divCartContent">
@@ -136,7 +135,7 @@
                 <div class="divDesc">
                     <div class="name">{{item.name}}</div>
                     <div class="price">
-                        <span class="spanMoney">$</span>{{item.amount}}
+                        <span class="spanMoney">￥</span>{{item.amount}}
                     </div>
                 </div>
                 <div class="divNum">
@@ -177,7 +176,7 @@
         </div>
         <div class="divNum">
             <div class="left">
-                <span>$</span><span>{{detailsDialog.item.price/100}}</span>
+                <span>￥</span><span>{{detailsDialog.item.price/100}}</span>
             </div>
             <div class="right">
                 <div class="divSubtract" v-if="detailsDialog.item.number > 0">
@@ -186,7 +185,7 @@
                 <div class="divDishNum">{{detailsDialog.item.number}}</div>
                 <div class="divTypes"
                      v-if="detailsDialog.item.flavors && detailsDialog.item.flavors.length > 0 && !detailsDialog.item.number "
-                     @click="chooseFlavorClick(detailsDialog.item)">Select specifications
+                     @click="chooseFlavorClick(detailsDialog.item)">Choose
                 </div>
                 <div class="divAdd" v-else>
                     <img src="./images/add.png" @click="addCart(detailsDialog.item)"/>
@@ -211,9 +210,9 @@
                         <img src="./images/noImg.png"/>
                     </div>
                 </el-image>
-                <div class="divSubTitle">{{item.name + '(' + item.copies + 'number)' }}
+                <div class="divSubTitle">{{item.name + '(' + item.copies + ' ordered)' }}
                     <div class="divPrice">
-                        <span>$</span><span>{{item.price/100}}</span>
+                        <span>￥</span><span>{{item.price/100}}</span>
                     </div>
                 </div>
                 <div class="content">{{item.description}}</div>
@@ -221,7 +220,7 @@
         </div>
         <div class="divNum">
             <div class="left">
-                <span>$</span><span>{{setMealDialog.item.price/100}}</span>
+                <span>￥</span><span>{{setMealDialog.item.price/100}}</span>
             </div>
             <div class="right">
                 <div class="divSubtract" v-if="setMealDialog.item.number > 0">
@@ -231,7 +230,7 @@
                 <div class="divAdd" v-if="setMealDialog.item.number">
                     <img src="./images/add.png" @click="addCart(setMealDialog.item)"/>
                 </div>
-                <div class="addCart" @click="addCart(setMealDialog.item)" v-if="!setMealDialog.item.number">add to the cart
+                <div class="addCart" @click="addCart(setMealDialog.item)" v-if="!setMealDialog.item.number">加入购物车
                 </div>
             </div>
         </div>
@@ -240,11 +239,11 @@
         </div>
     </van-dialog>
 </div>
-<!-- Development environment version, including helpful command line warnings -->
+<!-- Development environment version with helpful command line warnings -->
 <script src="../backend/plugins/vue/vue.js"></script>
-<!-- Import component library -->
+<!-- Introduction of component libraries -->
 <script src="../backend/plugins/element-ui/index.js"></script>
-<!-- Introduce vant style -->
+<!-- Introducing the vant style -->
 <script src="./js/vant.min.js"></script>
 <!-- Introducing axios -->
 <script src="../backend/plugins/axios/axios.min.js"></script>
@@ -257,7 +256,6 @@
         el: '#main',
         data() {
             return {
-                //left dish category index
                 activeType: 0,
                 categoryList: [],
                 categoryId: undefined,
@@ -317,10 +315,9 @@
             this.initData()
         },
         methods: {
-            //Initialization data
+
             initData() {
                 Promise.all([categoryListApi(), cartListApi({})]).then(res => {
-                    //Get categorical data
                     if (res[0].code === 1) {
                         this.categoryList = res[0].data
                         if (Array.isArray(res[0].data) && res[0].data.length > 0) {
@@ -334,7 +331,7 @@
                     } else {
                         this.$notify({type: 'warning', message: res[0].msg});
                     }
-                    //Get dish data
+
                     if (res[1].code === 1) {
                         this.cartData = res[1].data
                     } else {
@@ -342,17 +339,16 @@
                     }
                 })
             },
-            //Category click
+
             categoryClick(index, id, type) {
                 this.activeType = index
                 this.categoryId = id
-                if (type === 1) {//dishes
+                if (type === 1) {
                     this.getDishList()
                 } else {
                     this.getSetmealData()
                 }
             },
-            //Get dish data
             async getDishList() {
                 if (!this.categoryId) {
                     return
@@ -375,7 +371,6 @@
                     this.$notify({type: 'warning', message: res.msg});
                 }
             },
-            //Get package data setmealId
             async getSetmealData() {
                 if (!this.categoryId) {
                     return
@@ -398,7 +393,7 @@
                     this.$notify({type: 'warning', message: res.msg});
                 }
             },
-            //Get cart data
+
             async getCartData() {
                 const res = await cartListApi({})
                 if (res.code === 1) {
@@ -407,19 +402,19 @@
                     this.$notify({type: 'warning', message: res.msg});
                 }
             },
-            //Add items to the cart from the menu
+
             async addCart(item) {
                 let params = {
-                    amount: item.price / 100,//the amount
-                    dishFlavor: item.dishFlavor,//flavor if not passed undefined
-                    dishId: undefined,//dish id
-                    setmealId: undefined,//package id
+                    amount: item.price / 100,
+                    dishFlavor: item.dishFlavor,
+                    dishId: undefined,
+                    setmealId: undefined,
                     name: item.name,
                     image: item.image
                 }
-                if (Array.isArray(item.flavors)) {//Indicates that it is a dish
+                if (Array.isArray(item.flavors)) {
                     params.dishId = item.id
-                } else {//Indicates that the set meal has no taste
+                } else {
                     params.setmealId = item.id
                 }
                 const res = await addCartApi(params)
@@ -438,7 +433,7 @@
                 }
             },
 
-            //Reduce selected items in the menu
+
             async subtractCart(item) {
                 let params = {
                     dishId: item.id,
@@ -464,19 +459,18 @@
                 }
             },
 
-            //expand shopping cart
             openCart() {
                 if (this.cartData.length > 0) {
                     this.cartDialogShow = true
                 }
             },
-            //Increase the number of items in the shopping cart
+
             async cartNumAdd(item) {
                 let params = {
-                    amount: item.amount,//the amount
-                    dishFlavor: item.dishFlavor,//flavor: if not passed undefined
-                    dishId: item.dishId,//dish id
-                    setmealId: item.setmealId,//package id
+                    amount: item.amount,
+                    dishFlavor: item.dishFlavor,
+                    dishId: item.dishId,
+                    setmealId: item.setmealId,
                     name: item.name,
                     image: item.image
                 }
@@ -493,7 +487,6 @@
                     this.$notify({type: 'warning', message: res.msg});
                 }
             },
-            //Reduce the number of items in the shopping cart
             async cartNumberSubtract(item) {
                 let params = {
                     dishId: item.dishId,
@@ -511,8 +504,6 @@
                     this.$notify({type: 'warning', message: res.msg});
                 }
             },
-
-            //Modify the data number in the product list
             changeDishList(item) {
                 for (let ele of this.dishList) {
                     if (ele.id === (item.setmealId || item.dishId)) {
@@ -520,8 +511,6 @@
                     }
                 }
             },
-
-            //empty cart
             async clearCart() {
                 const res = await clearCartApi()
                 if (res.code === 1) {
@@ -534,7 +523,6 @@
                     this.$notify({type: 'warning', message: res.msg});
                 }
             },
-            //Click to select specifications
             chooseFlavorClick(item) {
                 this.dialogFlavor = {
                     name: '',
@@ -554,11 +542,9 @@
             },
             flavorClick(flavor, item) {
                 flavor.dishFlavor = item
-                //Forcibly refresh the dom of the dialog
                 this.dialogFlavor.show = false
                 this.dialogFlavor.show = true
             },
-            //Select specifications to add to cart
             dialogFlavorAddCart() {
                 const dialogFlavor = this.dialogFlavor
                 let flag = true
@@ -568,7 +554,7 @@
                         dishFlavor.push(item.dishFlavor)
                     } else {
                         flag = false
-                        Notify({type: 'warning', message: 'please choose' + item.name});
+                        Notify({type: 'warning', message: 'Please choose ' + item.name});
                     }
                 })
                 if (flag) {
@@ -584,11 +570,11 @@
                 }
 
             },
-            //Network image path conversion
+            //网络Picture路径转换
             imgPathConvert(path) {
                 return imgPath(path)
             },
-            //Jump to the settlement interface
+            //跳转到去结算界面
             toAddOrderPage() {
                 if (this.cartData.length > 0) {
                     window.requestAnimationFrame(() => {
@@ -602,14 +588,14 @@
                 })
             },
             async dishDetails(item) {
-                //Clear the object data first, if not, dialog uses v-if
+                //先清除对象数据，如果不行的话dialog使用v-if
                 this.detailsDialog.item = {}
                 this.setMealDialog.item = {}
                 if (Array.isArray(item.flavors)) {
                     this.detailsDialog.item = item
                     this.detailsDialog.show = true
                 } else {
-                    //Show package data
+                    //显示套餐的数据
                     const res = await setMealDishDetailsApi(item.id)
                     if (res.code === 1) {
                         this.setMealDialog.item = {...item, list: res.data}

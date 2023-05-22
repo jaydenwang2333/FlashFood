@@ -1,4 +1,4 @@
-
+// Query List Interface
 const getCategoryPage = (params) => {
     return $axios({
         url: '/category/page',
@@ -7,7 +7,7 @@ const getCategoryPage = (params) => {
     })
 }
 
-
+// Interface to edit page counter-check details
 const queryCategoryById = (id) => {
     return $axios({
         url: `/category/${id}`,
@@ -15,7 +15,7 @@ const queryCategoryById = (id) => {
     })
 }
 
-
+// Delete the current front interface
 const deleCategory = (id) => {
     return $axios({
         url: '/category',
@@ -24,7 +24,7 @@ const deleCategory = (id) => {
     })
 }
 
-
+// Modify the interface
 const editCategory = (params) => {
     return $axios({
         url: '/category',
@@ -33,7 +33,7 @@ const editCategory = (params) => {
     })
 }
 
-
+// New interface
 const addCategory = (params) => {
     return $axios({
         url: '/category',

@@ -19,8 +19,8 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
 
     @Autowired
     private DishService dishService;
-    @Autowired
-    private SetmealService setmealService;
+//    @Autowired
+//    private SetmealService setmealService;
 
 
     @Override
@@ -34,13 +34,13 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
         }
 
 
-        LambdaQueryWrapper<Setmeal> setmealLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        setmealLambdaQueryWrapper.eq(Setmeal::getCategoryId, id);
-        count = setmealService.count(setmealLambdaQueryWrapper);
+//        LambdaQueryWrapper<Setmeal> setmealLambdaQueryWrapper = new LambdaQueryWrapper<>();
+//        setmealLambdaQueryWrapper.eq(Setmeal::getCategoryId, id);
+//        count = setmealService.count(setmealLambdaQueryWrapper);
 
-        if (count > 0) {
-            throw new CustomException("Set Meals exist under this category and therefore cannot be deleted");
-        }
+//        if (count > 0) {
+//            throw new CustomException("Set Meals exist under this category and therefore cannot be deleted");
+//        }
 
         super.removeById(id);
     }
