@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- 引入样式 -->
     <link rel="stylesheet" href="../../plugins/element-ui/index.css"/>
     <link rel="stylesheet" href="../../styles/common.css"/>
     <link rel="stylesheet" href="../../styles/page.css"/>
@@ -88,11 +87,8 @@
         </el-form>
     </div>
 </div>
-<!-- 开发环境版本，包含了有帮助的命令行警告 -->
 <script src="../../plugins/vue/vue.js"></script>
-<!-- 引入组件库 -->
 <script src="../../plugins/element-ui/index.js"></script>
-<!-- 引入axios -->
 <script src="../../plugins/axios/axios.min.js"></script>
 <script src="../../js/request.js"></script>
 <script src="../../api/member.js"></script>
@@ -117,13 +113,11 @@
         computed: {
             rules() {
                 return {
-                    //账号
                     username: [
                         {
                             required: true, 'validator': checkUserName, trigger: 'blur'
                         }
                     ],
-                    //姓名
                     name: [{required: true, 'validator': checkName, 'trigger': 'blur'}],
                     'phone': [{'required': true, 'validator': checkPhone, 'trigger': 'blur'}],
                     'idNumber': [{'required': true, 'validator': validID, 'trigger': 'blur'}]
@@ -146,7 +140,7 @@
                     if (String(res.code) === '1') {
                         console.log(res.data)
                         this.ruleForm = res.data
-                        this.ruleForm.sex = res.data.sex === '0' ? '女' : '男'
+                        this.ruleForm.sex = res.data.sex === '0' ? 'female' : 'male'
                         // this.ruleForm.password = ''
                     } else {
                         this.$message.error(res.msg || 'ProcessFailed')
@@ -161,7 +155,6 @@
                                 ...this.ruleForm,
                                 sex: this.ruleForm.sex === 'Female' ? '0' : '1'
                             }
-                            // 调用member.js中的addEmployee方法，进行添加
                             addEmployee(params).then(res => {
                                 if (res.code === 1) {
                                     this.$message.success('Adding Successful！')
@@ -174,7 +167,7 @@
                                             'phone': '',
                                             // 'password': '',
                                             // 'rePassword': '',/
-                                            'sex': '男',
+                                            'sex': 'male',
                                             'idNumber': ''
                                         }
                                     }
