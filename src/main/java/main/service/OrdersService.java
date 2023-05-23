@@ -42,4 +42,12 @@ public interface OrdersService extends IService<Orders> {
                             String number,
                             @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss") Date beginTime,
                             @DateTimeFormat(pattern = "yyyy-mm-dd HH:mm:ss") Date endTime);
+
+    /**
+     * Update order
+     *
+     * @param orders order information
+     */
+    void update(Orders orders);
+
 }

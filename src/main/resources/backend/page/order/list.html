@@ -82,21 +82,21 @@
                     <span>${{ row.amount }}</span>
                 </template>
             </el-table-column>
-            <el-table-column prop="btn" label="Modify">
+            <el-table-column prop="btn" label="Detail">
                 <template slot-scope="{ row }">
                     <el-button type="text" @click="goDetail(row)" class="blueBug">
                         View
                     </el-button>
-                    <el-divider v-if="row.status === 2" direction="vertical"></el-divider>
-                    <el-button v-if="row.status === 2" type="text" @click="cancelOrDeliveryOrComplete(3, row.id)"
-                               class="blueBug">
-                        Delivery
-                    </el-button>
-                    <el-divider v-if="row.status === 3" direction="vertical"></el-divider>
-                    <el-button v-if="row.status === 3" type="text" @click="cancelOrDeliveryOrComplete(4, row.id)"
-                               class="blueBug">
-                        Complete
-                    </el-button>
+<!--                    <el-divider v-if="row.status === 2" direction="vertical"></el-divider>-->
+<!--                    <el-button v-if="row.status === 2" type="text" @click="cancelOrDeliveryOrComplete(3, row.id)"-->
+<!--                               class="blueBug">-->
+<!--                        Delivery-->
+<!--                    </el-button>-->
+<!--                    <el-divider v-if="row.status === 3" direction="vertical"></el-divider>-->
+<!--                    <el-button v-if="row.status === 3" type="text" @click="cancelOrDeliveryOrComplete(4, row.id)"-->
+<!--                               class="blueBug">-->
+<!--                        Complete-->
+<!--                    </el-button>-->
                 </template>
             </el-table-column>
         </el-table>

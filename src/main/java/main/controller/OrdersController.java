@@ -82,5 +82,20 @@ public class OrdersController {
         return R.success(pageInfo);
     }
 
+    /**
+     * <h2>Update order<h2/>
+     *
+     * @param id     order id
+     * @param orders order information
+     * @return {@link R}
+     */
+    @PutMapping("/{id}")
+    public R<String> update(@PathVariable Long id, @RequestBody Orders orders) {
+        log.info("Update order: {}", orders);
+        orders.setId(id);
+        ordersService.update(orders);
+        return R.success("Order updated");
+    }
+
 
 }

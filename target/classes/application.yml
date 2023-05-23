@@ -53,5 +53,5 @@ mybatis-plus:
 
 main:
 
-  linux-path: /Users/wangxiao/Downloads/FlashFood/img/  # local file test
+  linux-path: img/  # local file test
 

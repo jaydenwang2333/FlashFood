@@ -166,6 +166,25 @@ public class OrdersServiceImpl extends ServiceImpl<OrdersMapper, Orders> impleme
         return dtoPage;
     }
 
+    /**
+     * Update order
+     *
+     * @param orders order information
+     */
+    @Transactional
+    public void update(Orders orders) {
+        if (orders.getId() == null) {
+            throw new CustomException("Order ID cannot be null");
+        }
+        Orders existingOrder = this.getById(orders.getId());
+        if (existingOrder == null) {
+            throw new CustomException("Order does not exist");
+        }
+        // copy properties from `orders` to `existingOrder`, or update `existingOrder` manually
+        BeanUtils.copyProperties(orders, existingOrder);
+        this.saveOrUpdate(existingOrder);
+    }
+
 
     /**
      * Get administrator order details

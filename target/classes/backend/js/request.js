@@ -51,6 +51,7 @@
                 message = "Interface connection overtime";
             } else if (message.includes("Request failed with status code")) {
                 message = "Interface" + message.substr(message.length - 3) + "error";
+                // message = "Process failed";
             }
             window.ELEMENT.Message({
                 message: message,

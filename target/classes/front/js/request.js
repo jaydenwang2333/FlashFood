@@ -52,7 +52,8 @@
             } else if (message.includes("timeout")) {
                 message = "System interface request timeout";
             } else if (message.includes("Request failed with status code")) {
-                message = "System interfaces" + message.substr(message.length - 3) + "Exceptions";
+                // message = "System interfaces" + message.substr(message.length - 3) + "Exceptions";
+                message  = "Process Failed";
             }
             window.vant.Notify({
                 message: message,
