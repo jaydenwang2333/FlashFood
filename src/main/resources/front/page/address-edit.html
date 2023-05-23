@@ -7,15 +7,10 @@
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
     <title>UFood</title>
     <link rel="icon" href="./../images/favico.ico">
-    <!--不同屏幕尺寸根字体设置-->
     <script src="./../js/base.js"></script>
-    <!--element-ui的样式-->
     <link rel="stylesheet" href="../../backend/plugins/element-ui/index.css"/>
-    <!--引入vant样式-->
     <link rel="stylesheet" href="../styles/vant.min.css"/>
-    <!-- 引入样式  -->
     <link rel="stylesheet" href="../styles/index.css"/>
-    <!--本页面内容的样式-->
     <link rel="stylesheet" href="./../styles/address-edit.css"/>
 </head>
 <body>
@@ -50,7 +45,6 @@
             </el-input>
         </div>
         <div class="divItem ">
-            <!-- 标签会 -->
             <span>label：</span>
             <span v-for="(item,index) in labelList" :key="index" @click="form.label = item;activeIndex = index"
                   :class="{spanItem:true,spanActiveSchool:activeIndex === index}">{{item}}</span>
@@ -59,15 +53,11 @@
         <div class="divDelete" @click="deleteAddress" v-if="id">Delete Address</div>
     </div>
 </div>
-<!-- 开发环境版本,包含了有帮助的命令行警告 -->
 <script src="../../backend/plugins/vue/vue.js"></script>
-<!-- 引入组件库 -->
 <script src="../../backend/plugins/element-ui/index.js"></script>
-<!-- 引入vant样式 -->
 <script src="./../js/vant.min.js"></script>
 <script src="./../js/common.js"></script>
 <script src="./../api/address.js"></script>
-<!-- 引入axios -->
 <script src="../../backend/plugins/axios/axios.min.js"></script>
 <script src="./../js/request.js"></script>
 <script>
@@ -77,11 +67,11 @@
             return {
                 title: 'Add Address',
                 form: {
-                    consignee: '',//联系人
-                    phone: undefined,//手机号
-                    sex: '1',//0表示女 1 表示男
-                    detail: '',//收货地址
-                    label: 'C',//标签
+                    consignee: '',
+                    phone: undefined,
+                    sex: '1',
+                    detail: '',
+                    label: 'C',
                 },
                 labelList: [
                     'A', 'B', 'C', 'D'
