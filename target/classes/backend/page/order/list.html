@@ -81,7 +81,7 @@
             <el-table-column prop="orderTime" label="TimeStamp" min-width="100"></el-table-column>
             <el-table-column prop="amount" label="MONEY!!!">
                 <template slot-scope="{ row }">
-                    <span>￥{{ row.amount }}</span>
+                    <span>${{ row.amount }}</span>
                 </template>
             </el-table-column>
             <el-table-column prop="btn" label="Modify">
