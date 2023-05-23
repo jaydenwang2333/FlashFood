@@ -3,20 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- The 3 meta tags above *must* be placed at the top, and anything else *must* follow! -->
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=no,minimal-ui">
     <title>UFood</title>
     <link rel="icon" href="images/favico.ico">
-    <!--Root font settings for different screen sizes-->
+    <!--不同屏幕尺寸根字体设置-->
     <script src="./js/base.js"></script>
-    <!--element-ui style-->
+    <!--element-ui的样式-->
     <link rel="stylesheet" href="../backend/plugins/element-ui/index.css"/>
-    <!--Introducing the vant style-->
+    <!--引入vant样式-->
     <link rel="stylesheet" href="styles/vant.min.css"/>
-    <!--Introduce style-->
+    <!-- 引入样式  -->
     <link rel="stylesheet" href="styles/index.css"/>
-    <!--Style of the content on this page-->
+    <!--本页面内容的样式-->
     <link rel="stylesheet" href="styles/main.css"/>
 </head>
 <body>
@@ -30,14 +30,14 @@
             <div class="divDesc">
                 <div class="divName">UFood</div>
                 <div class="divSend">
-                    <span><img src="./images/time.png"/> Distance:2miles</span>
-                    <span><img src="./images/money.png"/> DeliveryFee:$5</span>
-                    <span><img src="./images/location.png"/> EstimatedTime:30min</span>
+                    <span><img src="./images/time.png"/> 2.5 miles</span>
+                    <span><img src="./images/money.png"/> No DeliveryFee</span>
+                    <span><img src="./images/location.png"/> Estimated 60min</span>
                 </div>
             </div>
         </div>
         <div class="divDesc">
-            Description:The UFood provides online ordering service.
+            UFood Online Ordering System
         </div>
     </div>
     <div class="divBody">
@@ -59,7 +59,7 @@
                     <div>
                         <div class="divName">{{item.name}}</div>
                         <div class="divDesc">{{item.description}}</div>
-                        <div class="divDesc">{{'Monthly Sold' + (item.saleNum ? item.saleNum : 0) }}</div>
+                        <div class="divDesc">{{'Sold ' + (item.saleNum ? item.saleNum : 0) }}</div>
                         <div class="divBottom"><span>$</span><span>{{item.price/100}}</span></div>
                         <div class="divNum">
                             <div class="divSubtract" v-if="item.number > 0">
@@ -122,7 +122,7 @@
         <div class="divCartTitle">
             <div class="title">Cart</div>
             <div class="clear" @click="clearCart">
-                <i class="el-icon-delete"></i> EmptyTheCart
+                <i class="el-icon-delete"></i> EmptyCart
             </div>
         </div>
         <div class="divCartContent">
@@ -210,7 +210,7 @@
                         <img src="./images/noImg.png"/>
                     </div>
                 </el-image>
-                <div class="divSubTitle">{{item.name + '(' + item.copies + ' ordered)' }}
+                <div class="divSubTitle">{{item.name + '(' + item.copies + '份)' }}
                     <div class="divPrice">
                         <span>$</span><span>{{item.price/100}}</span>
                     </div>
@@ -230,7 +230,7 @@
                 <div class="divAdd" v-if="setMealDialog.item.number">
                     <img src="./images/add.png" @click="addCart(setMealDialog.item)"/>
                 </div>
-                <div class="addCart" @click="addCart(setMealDialog.item)" v-if="!setMealDialog.item.number">加入购物车
+                <div class="addCart" @click="addCart(setMealDialog.item)" v-if="!setMealDialog.item.number">AddToCart
                 </div>
             </div>
         </div>
@@ -239,13 +239,13 @@
         </div>
     </van-dialog>
 </div>
-<!-- Development environment version with helpful command line warnings -->
+
 <script src="../backend/plugins/vue/vue.js"></script>
-<!-- Introduction of component libraries -->
+<!-- 引入组件库 -->
 <script src="../backend/plugins/element-ui/index.js"></script>
-<!-- Introducing the vant style -->
+<!-- 引入vant样式 -->
 <script src="./js/vant.min.js"></script>
-<!-- Introducing axios -->
+<!-- 引入axios -->
 <script src="../backend/plugins/axios/axios.min.js"></script>
 <script src="./js/request.js"></script>
 <script src="./js/common.js"></script>
@@ -256,6 +256,7 @@
         el: '#main',
         data() {
             return {
+                //左边菜品类别index
                 activeType: 0,
                 categoryList: [],
                 categoryId: undefined,
@@ -315,9 +316,10 @@
             this.initData()
         },
         methods: {
-
+            //初始化数据
             initData() {
                 Promise.all([categoryListApi(), cartListApi({})]).then(res => {
+                    //获取分类数据
                     if (res[0].code === 1) {
                         this.categoryList = res[0].data
                         if (Array.isArray(res[0].data) && res[0].data.length > 0) {
@@ -331,7 +333,7 @@
                     } else {
                         this.$notify({type: 'warning', message: res[0].msg});
                     }
-
+                    //获取菜品数据
                     if (res[1].code === 1) {
                         this.cartData = res[1].data
                     } else {
@@ -339,16 +341,17 @@
                     }
                 })
             },
-
+            //分类点击
             categoryClick(index, id, type) {
                 this.activeType = index
                 this.categoryId = id
-                if (type === 1) {
+                if (type === 1) {//菜品
                     this.getDishList()
                 } else {
                     this.getSetmealData()
                 }
             },
+            //获取菜品数据
             async getDishList() {
                 if (!this.categoryId) {
                     return
@@ -371,6 +374,7 @@
                     this.$notify({type: 'warning', message: res.msg});
                 }
             },
+            //获取套餐数据setmealId
             async getSetmealData() {
                 if (!this.categoryId) {
                     return
@@ -393,7 +397,7 @@
                     this.$notify({type: 'warning', message: res.msg});
                 }
             },
-
+            //获取购物车数据
             async getCartData() {
                 const res = await cartListApi({})
                 if (res.code === 1) {
@@ -402,19 +406,19 @@
                     this.$notify({type: 'warning', message: res.msg});
                 }
             },
-
+            //菜单中往购物车中添加商品
             async addCart(item) {
                 let params = {
-                    amount: item.price / 100,
-                    dishFlavor: item.dishFlavor,
-                    dishId: undefined,
-                    setmealId: undefined,
+                    amount: item.price / 100,//金额
+                    dishFlavor: item.dishFlavor,//口味  如果没有传undefined
+                    dishId: undefined,//菜品id
+                    setmealId: undefined,//套餐id
                     name: item.name,
                     image: item.image
                 }
-                if (Array.isArray(item.flavors)) {
+                if (Array.isArray(item.flavors)) {//表示是菜品
                     params.dishId = item.id
-                } else {
+                } else {//表示套餐 套餐没有口味
                     params.setmealId = item.id
                 }
                 const res = await addCartApi(params)
@@ -433,7 +437,7 @@
                 }
             },
 
-
+            //菜单中减少选中的商品
             async subtractCart(item) {
                 let params = {
                     dishId: item.id,
@@ -459,18 +463,19 @@
                 }
             },
 
+            //展开购物车
             openCart() {
                 if (this.cartData.length > 0) {
                     this.cartDialogShow = true
                 }
             },
-
+            //购物车中增加商品数量
             async cartNumAdd(item) {
                 let params = {
-                    amount: item.amount,
-                    dishFlavor: item.dishFlavor,
-                    dishId: item.dishId,
-                    setmealId: item.setmealId,
+                    amount: item.amount,//金额
+                    dishFlavor: item.dishFlavor,//口味  如果没有传undefined
+                    dishId: item.dishId,//菜品id
+                    setmealId: item.setmealId,//套餐id
                     name: item.name,
                     image: item.image
                 }
@@ -487,6 +492,7 @@
                     this.$notify({type: 'warning', message: res.msg});
                 }
             },
+            //购物车中减少商品数量
             async cartNumberSubtract(item) {
                 let params = {
                     dishId: item.dishId,
@@ -504,6 +510,8 @@
                     this.$notify({type: 'warning', message: res.msg});
                 }
             },
+
+            //修改商品列表中的数据number
             changeDishList(item) {
                 for (let ele of this.dishList) {
                     if (ele.id === (item.setmealId || item.dishId)) {
@@ -511,6 +519,8 @@
                     }
                 }
             },
+
+            //清空购物车
             async clearCart() {
                 const res = await clearCartApi()
                 if (res.code === 1) {
@@ -523,6 +533,7 @@
                     this.$notify({type: 'warning', message: res.msg});
                 }
             },
+            //点击Choose
             chooseFlavorClick(item) {
                 this.dialogFlavor = {
                     name: '',
@@ -542,9 +553,11 @@
             },
             flavorClick(flavor, item) {
                 flavor.dishFlavor = item
+                //强制刷新dialog的dom
                 this.dialogFlavor.show = false
                 this.dialogFlavor.show = true
             },
+            //ChooseAddToCart
             dialogFlavorAddCart() {
                 const dialogFlavor = this.dialogFlavor
                 let flag = true
@@ -554,7 +567,7 @@
                         dishFlavor.push(item.dishFlavor)
                     } else {
                         flag = false
-                        Notify({type: 'warning', message: 'Please choose ' + item.name});
+                        Notify({type: 'warning', message: '请选择' + item.name});
                     }
                 })
                 if (flag) {
@@ -570,7 +583,7 @@
                 }
 
             },
-            //网络Picture路径转换
+            //网络图片路径转换
             imgPathConvert(path) {
                 return imgPath(path)
             },
